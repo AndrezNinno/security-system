@@ -16,8 +16,17 @@ class AdminVisitantesController extends Controller
     public function index(Request $request)
     {
         $visitantes = User::where('rol', 'Visitante')->where('estado', 1)->get();
+        $empleados = User::where('rol', 'Empleado')->where('estado', 1)->get();
         $tiempoMaximo = VariablesGlobales::where('nombre', 'tiempo_maximo')->first()->valor;
         $tiempoActual = now();
+
+        $guardia = $request->guardia;
+
+        if(count($visitantes) == 0){
+            $visitantes = $empleados;
+        } else {
+            $visitantes = array_merge($visitantes, $empleados);
+        }
 
         $administrador = $request->administrador;
         return view('administrador.visitantes.db-visitantes',[
