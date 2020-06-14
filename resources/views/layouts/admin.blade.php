@@ -138,7 +138,7 @@
                         End Logo
                 *===========================-->
                 <div class="nav_wrapper_main d-flex align-items-center justify-content-between flex-grow-1">
-                    <a class="vz_mobile_menu_icon mr-3 d-md-flex d_none_sm" id="vz_mobileCollapseIcon" href="javascript:void(0)">
+                    <a class="" id="vz_mobileCollapseIcon" href="javascript:void(0)">
                         <span></span>
                     </a>
                     <ul class="navbar-nav navbar-nav-right mr-0 ml-auto">
