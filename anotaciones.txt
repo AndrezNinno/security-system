@@ -1,0 +1,60 @@
+                    Funcionalidades
+
+Administrador:
+
+- Tiene la capacidad de crear guardias.     |Estos están relacionados a un rol de usuario.
+- Tiene la capacidad de crear empleados.    |
+- Tiene la capacidad de crear puertas.
+- Tiene la capacidad de administrar variables globales como:
+    - Aforo : Capacidad total de personas que se encuentran en el centro comercial
+    - TiempoVisita: Tiempo que debe durar una persona dentro del centro comercial.
+
+    1. Buscar variable-global -> nombre = Aforo
+    2. Buscar usuario -> estado = adentro
+    3. 
+
+    Buscar en usuarios, cedula = ####### -> Consigo el ID
+    Buscar en Ingresos, idUsuario = ID -> Lista de las veces que el usuario a venido..
+
+    Pendiente.. 
+    Si el usuario va a salir pero previamente no tiene un registro de entrada.. alertar al guardia.
+    Saber cómo hptas entró sin un aviso?
+    1. Registró entrada luego registró salida.
+    2. Registró entrada.. pero este nunca salió..
+    3. No registró entrada pero si salió..
+
+Administrador: 
+
+    - Registra guardias - REALIZADO
+    - Registra empleados
+    - Registra puertas
+    - Asigna guardias a puertas
+    - Edita las variables globales
+    - Revisa estado y tiempo de los visitantes.
+    - Cambiar estado de los visitantes.
+    - Listar los cambios de puerta de los guardias.
+
+Guardias:
+
+    - Inicio de sesión.
+        - Buscar por cédula al guardia. Buscar CEDULA == ### && ROL == GUARDIA
+        - Comparar las contraseñas.
+    - Registrar visitantes.
+        - Buscar que la cédula no esté repetida.
+    - Registrar ingresos visitante.
+        - Buscar visitante en la BD.
+        - Actualizar estado.
+        - Crear registro ingreso.
+    - Registrar salida visitante.
+        - Buscar visitante en la BD.
+        - Actualizar estado.
+        - Crear registro salida.
+    - Cambiar estado de un empleado (Si está adentro o si salió)
+        - entrada
+        - salida
+
+
+Datos importantes a tener en cuenta:
+
+    Los usuarios con un rol de guardia:
+        - Se les guardará todos los datos (foto, nombre, CONTRASEÑA, correo, cedula, etc..)
