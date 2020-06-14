@@ -119,27 +119,32 @@ class GuardiaVisitanteController extends Controller
         $numeroDocumento = $request->input('ingresoNumDocumento');
         $temperatura = $request->input('ingresoTemperatura');
 
-        $busqueda = User::where('tipo_documento', $tipoDocumento)->where('numero_documento', $numeroDocumento)->where('rol', 'Visitante')->get();
+        $busqueda = User::where('tipo_documento', $tipoDocumento)->where('numero_documento', $numeroDocumento)->get();
 
         if($busqueda != null && count($busqueda) == 1){
             $usuario = $busqueda[0];
-            if($usuario->estado == 1){
-                return redirect()->back()->withErrors(['El usuario ya se encuentra dentro del centro.'])->withInput();
-            }
 
-            $ingreso = new Ingresos;
-            $ingreso->descripcion = 'Ingreso';
-            $ingreso->temperatura = $temperatura;
-            $ingreso->id_usuario = $usuario->id;
-
-            $usuario->estado = 1;
-            $respuesta2 = $usuario->save();
-
-            $respuesta = $ingreso->save();
-            if($respuesta != null && $respuesta == 1 && $respuesta2 != null && $respuesta2 == 1){
-                return redirect()->back();
+            if($usuario->rol == 'Visitante' || $usuario->rol == 'Empleado'){
+                if($usuario->estado == 1){
+                    return redirect()->back()->withErrors(['El usuario ya se encuentra dentro del centro.'])->withInput();
+                }
+    
+                $ingreso = new Ingresos;
+                $ingreso->descripcion = 'Ingreso';
+                $ingreso->temperatura = $temperatura;
+                $ingreso->id_usuario = $usuario->id;
+    
+                $usuario->estado = 1;
+                $respuesta2 = $usuario->save();
+    
+                $respuesta = $ingreso->save();
+                if($respuesta != null && $respuesta == 1 && $respuesta2 != null && $respuesta2 == 1){
+                    return redirect()->back();
+                } else {
+                    return redirect()->back()->withErrors(['Hubo un error registrando el ingreso'])->withInput();
+                }
             } else {
-                return redirect()->back()->withErrors(['Hubo un error registrando el ingreso'])->withInput();
+                return redirect()->back()->withErrors(['Hubo un error buscando el usuario'])->withInput();
             }
         } else {
             return redirect()->back()->withErrors(['Hubo un error buscando el usuario'])->withInput();
