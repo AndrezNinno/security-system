@@ -16,7 +16,7 @@ class AutenticacionAdmin
      */
     public function handle($request, Closure $next)
     {
-        if($request->session()->exist('usuario')){
+        if($request->session()->exists('usuario')){
             $administrador = User::find($request->session()->get('usuario'));
             $request->merge(['administrador' => $administrador]);
 
