@@ -17,8 +17,8 @@ class GuardiaVisitanteController extends Controller
      */
     public function index(Request $request)
     {
-        $visitantes = User::where('rol', 'Visitante')->where('estado', 1)->get();
-        $empleados = User::where('rol', 'Empleado')->where('estado', 1)->get();
+        $visitantes = User::where('rol', 'Visitante')->where('estado', 1)->get()->all();
+        $empleados = User::where('rol', 'Empleado')->where('estado', 1)->get()->all();
         $tiempoMaximo = VariablesGlobales::where('nombre', 'tiempo_maximo')->first()->valor;
         $tiempoActual = now();
 

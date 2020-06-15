@@ -88,6 +88,12 @@ Route::prefix('administrador')->group( function() {
 
         Route::post('/actualizar/{user}', 'AdminEmpleadosController@update')->middleware('adminAuth');
     });
+
+    Route::prefix('DB')->group( function() {
+        Route::get('/', 'AdminDBController@index')->middleware('adminAuth');
+
+        Route::get('/eliminar/{user}', 'AdminDBController@destroy')->middleware('adminAuth');
+    });
 });
 
 Route::prefix('guardia')->group( function() {

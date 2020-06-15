@@ -117,6 +117,10 @@
                             <li class=""><a class="nav-link text-center" href="/administrador/configuraciones" data-nav="forms" id="configuraciones">
                                 <i class="feather ft-settings"></i><span>Configuraciones</span></a>
                             </li>
+
+                            <li class=""><a class="nav-link text-center" href="/administrador/DB" data-nav="forms" id="configuraciones">
+                                <i class="feather ft-database"></i><span>Base de datos</span></a>
+                            </li>
                         </ul>
                         {{-- <div class="sidebar_content">
                         </div> --}}
