@@ -106,16 +106,31 @@ class GuardianController extends Controller
         
         if($guardia != null && count($guardia) == 1){
             $request->session()->put('guardia', $guardia[0]->id);
-            return redirect('/guardia/dashboard');
+            $guardian = $guardia[0];
+            $guardian->estado = 1;
+            $resultado = $guardian->save();
+            if($resultado == 1){
+                return redirect('/guardia/dashboard');
+            } else {
+                return redirect()->back()->withErrors(['Hubo un error cambiando el estado del guardia a activo']);
+            }
         } else {
             return redirect()->back()->withErrors(['No se encontró un usuario con ese documento o contraseña'])->withInput();
         }
     }
 
     public function logout(Request $request){
+        $idGuardia = $request->session()->get('guardia');
         $request->session()->forget('guardia');
+        $guardia = User::find($idGuardia);
 
-        return redirect('/');
+        $guardia->estado = 0;
+        $resultado = $guardia->save();
+        if($resultado == 1){
+            return redirect('/');
+        } else {
+            return redirect()->back()->withErrors(['Hubo un error cerrando sesión']);
+        }
     }
 
     public function perfil(Request $request){

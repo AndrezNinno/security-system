@@ -20,7 +20,7 @@ class CreatePuertasGuardiasTable extends Migration
 
             // Relación con la tabla usuarios
             $table->unsignedBigInteger('id_usuario')->comment('Id del guardia de turno sobre la puerta');
-            $table->foreign('id_usuario')->references('id')->on('users');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('');
 
             // Relación con la tabla puertas
             $table->unsignedBigInteger('id_puerta')->comment('Id de la puerta que será asignada');
