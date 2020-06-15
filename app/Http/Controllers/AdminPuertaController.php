@@ -85,9 +85,13 @@ class AdminPuertaController extends Controller
      * @param  \App\Puertas  $puertas
      * @return \Illuminate\Http\Response
      */
-    public function show(Puertas $puertas)
+    public function show(Request $request, Puertas $puerta)
     {
-        //
+        $administrador = $request->administrador;
+        return view('administrador.puertas.actualizar', [
+            'administrador' => $administrador,
+            'puerta' => $puerta
+        ]);
     }
 
     /**
@@ -108,9 +112,19 @@ class AdminPuertaController extends Controller
      * @param  \App\Puertas  $puertas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Puertas $puertas)
+    public function update(Request $request, Puertas $puerta)
     {
-        //
+        $puerta->nombre = $request->input('nombre');
+        $puerta->descripcion = $request->input('descripcion');
+        $puerta->estado = $request->input('estado');
+
+        $respuesta = $puerta->save();
+
+        if($respuesta == 1){
+            return redirect('/administrador/puertas');
+        } else {
+            return redirect('/administrador/puertas')->withErrors('Hubo un error actualizando la puerta');
+        }
     }
 
     /**

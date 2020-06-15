@@ -88,10 +88,14 @@
                                                     <div class="fw-600 ">{{ $puerta->nombre }}</div>
                                                 </td>
                                                 <td>{{ $puerta->descripcion }}</td>
-                                                <td>{{ $puerta->estado }}</td>
+                                                @if ($puerta->estado == 1)
+                                                    <td>Abierta</td>
+                                                @else
+                                                    <td>Cerrada</td>
+                                                @endif
                                                 <td>{{ $guardias[$puerta->nombre] }}</td>
                                                 <td>
-                                                    <a href="#" style="color: white" type="button" class="ti-pencil mr-1 btn btn-primary" title="Editar"></a>
+                                                    <a href="{{ '/administrador/puertas/editar/'.$puerta->id }}" style="color: white" type="button" class="ti-pencil mr-1 btn btn-primary" title="Editar"></a>
                                                     <a href="{{ '/administrador/puertas/asignar/'.$puerta->id }}" style="color: white" type="button" class="ti-list btn btn-primary" title="Asignar"></a>
                                                     <a href="{{'/administrador/puertas/eliminar/'.$puerta->id}}" style="color: white" type="button" class="ti-trash btn btn-primary" title="Borrar" onclick="return confirm('Está seguro que quiere eliminar la puerta?')"></a>
                                                 </td>

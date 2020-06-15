@@ -51,6 +51,10 @@ Route::prefix('administrador')->group( function() {
 
         Route::post('/registrar', 'AdminPuertaController@store')->middleware('adminAuth');
 
+        Route::get('/editar/{puerta}', 'AdminPuertaController@show')->middleware('adminAuth');
+
+        Route::post('/update/{puerta}', 'AdminPuertaController@update')->middleware('adminAuth');
+
         Route::get('/eliminar/{puerta}', 'AdminPuertaController@destroy')->middleware('adminAuth');
 
         Route::get('/asignar/{puerta}', 'PuertasGuardiasController@show')->middleware('adminAuth');
