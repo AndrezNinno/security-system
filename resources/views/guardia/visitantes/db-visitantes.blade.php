@@ -266,7 +266,7 @@
                                                 <td>
                                                     <div class="progress">
                                                         <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: {{ floor((($visitante->created_at->diffInMinutes($tiempoActual))/$tiempoMaximo) * 100) }}%;" aria-valuenow="25" aria-valuemin="0"
+                                                            style="width: {{ floor((($tiempos[$visitante->nombres]->diffInMinutes($tiempoActual))/$tiempoMaximo) * 100) }}%;" aria-valuenow="25" aria-valuemin="0"
                                                             aria-valuemax="100"></div>
                                                     </div>
                                                 </td>

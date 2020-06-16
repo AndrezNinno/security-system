@@ -128,11 +128,13 @@
                                                     <td>
                                                         <div class="progress">
                                                             <div class="progress-bar bg-info" role="progressbar"
-                                                                style="width: {{ floor((($visitante->created_at->diffInMinutes($tiempoActual))/$tiempoMaximo) * 100) }}%;" aria-valuenow="25" aria-valuemin="0"
+                                                                style="width: {{ floor((($tiempoActual->diffInMinutes($tiempos[$visitante->nombres]))/$tiempoMaximo) * 100) }}%;" aria-valuenow="25" aria-valuemin="0"
                                                                 aria-valuemax="100"></div>
                                                         </div>
                                                     </td>
-                                                    <td><span class="badge badge-info">in progress</span></td>
+                                                    <td>
+                                                        <span class="badge badge-info">in progress</span>
+                                                    </td>
                                                     <td>{{ $visitante->telefono }}</td>
                                                     <td>
                                                         <a href="{{'/guardia/visitantes/salir/'.$visitante->id}}" style="color: white" type="button" class="ti-new-window mr-1 btn btn-primary" title="Salir"></a>

@@ -21,20 +21,30 @@ class GuardiaVisitanteController extends Controller
         $empleados = User::where('rol', 'Empleado')->where('estado', 1)->get()->all();
         $tiempoMaximo = VariablesGlobales::where('nombre', 'tiempo_maximo')->first()->valor;
         $tiempoActual = now();
-
-        $guardia = $request->guardia;
-
+        
         if(count($visitantes) == 0){
             $visitantes = $empleados;
         } else {
             $visitantes = array_merge($visitantes, $empleados);
         }
-
+        
+        $tiempos = array();
+        foreach ($visitantes as $visitante) {
+            $ingreso = Ingresos::where("id_usuario", $visitante->id)->orderBy('id', 'desc')->first();
+            if($ingreso != null && $ingreso->descripcion == 'Ingreso'){
+                $tiempos = array_merge($tiempos, array($visitante->nombres => $ingreso->created_at));
+            } else {
+                return redirect('/administrador')->withErrors(['El visitante '.$visitante->tipo_documento.'-'.$visitante->numero_documento.' está activo pero su último registro es de salida.']);
+            }
+        }
+        
+        $guardia = $request->guardia;
         return view('guardia.visitantes.db-visitantes',[
             'visitantes' => $visitantes,
             'tiempoMaximo' => $tiempoMaximo,
             'tiempoActual' => $tiempoActual,
-            'guardia' => $guardia
+            'guardia' => $guardia,
+            'tiempos' => $tiempos
         ]);
     }
 
